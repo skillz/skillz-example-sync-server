@@ -1,0 +1,8 @@
+table MatchSuccess {
+    opcode: short = 6;
+    registeredMatchId: string;
+    tick_rate: int;
+    opponentUserId: long;
+    serverVersion: string;
+    serverVersionCode: short;
+}

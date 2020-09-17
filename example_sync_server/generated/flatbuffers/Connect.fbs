@@ -1,0 +1,10 @@
+table Connect {
+    opcode: short = 1;
+    userId: long;
+    matchId: string;
+    externalToken: string;
+    clientVersion: string;
+    clientCode: short;
+    clientPlatform: short = 0; // 0 = Unknown, 1 = iOS, 2 = Android
+    reconnecting: bool = false;
+}

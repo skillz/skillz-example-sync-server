@@ -1,0 +1,7 @@
+table GameState {
+    opcode: short = 12;
+    gameTickCount: int;
+    tickCount: int;
+    playerScore: int;
+    opponentScore: int;
+}

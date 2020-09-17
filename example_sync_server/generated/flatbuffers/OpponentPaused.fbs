@@ -1,0 +1,4 @@
+table OpponentPaused {
+    opcode: short = 7;
+    timeRemaining: short;
+}

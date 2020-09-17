@@ -1,0 +1,4 @@
+table KeepAlive {
+    opcode: short = 2;
+    success: bool;
+}

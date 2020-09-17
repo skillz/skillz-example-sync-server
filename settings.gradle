@@ -1,0 +1,3 @@
+rootProject.name = 'example_sync_server'
+
+include 'example_sync_server'

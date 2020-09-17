@@ -1,0 +1,61 @@
+apply plugin: 'application'
+mainClassName = 'com.skillz.example_sync_server.Main'
+def nettyVersion = '4.1.42.Final'
+
+run.doFirst {
+    environment 'scriptsPath', project(':example_sync_server').projectDir.absolutePath + '/src/com/skillz/example_sync_server/scripts/'
+    environment 'fbsPath', project(':example_sync_server').projectDir.absolutePath + '/generated/flatbuffers/'
+}
+
+sourceSets {
+    main {
+        java {
+            srcDirs = []
+        }
+        groovy {
+            srcDirs += ['src', 'generated']
+            exclude 'com/skillz/example_sync_server/scripts/**'
+        }
+        resources {
+            srcDirs = ['resources/certs', 'resources/conf', 'src/com/skillz/example_sync_server/scripts']
+        }
+    }
+}
+
+dependencies {
+    compile group: 'io.netty', name: 'netty-all', version: "${nettyVersion}"
+    compile group: 'org.reflections', name: 'reflections', version: '0.9.12'
+    compile group: 'org.gperfutils', name: 'gprof', version: '0.3.1-groovy-2.4'
+    compile fileTree(dir: 'libs', include: '*.jar')
+}
+
+test {
+    useJUnitPlatform()
+}
+
+task cleanFlatBuffers(type: Exec) {
+    commandLine 'sh', '-c', 'rm -f generated/messages/*'
+}
+
+task createFlatBuffersGroovy(type: Exec) {
+    commandLine 'sh', '-c', "flatc --java -o generated/messages generated/flatbuffers/*"
+}
+
+task createFlatBuffersCSharp(type: Exec) {
+    commandLine 'sh', '-c', 'flatc --csharp -o csharp_flatbuffer_gen generated/flatbuffers/* && zip -r csharp_flatbuffer_gen.zip csharp_flatbuffer_gen && rm -rf ./csharp_flatbuffer_gen/ && mv -f csharp_flatbuffer_gen.zip ~/Downloads/csharp_flatbuffer_gen.zip'
+}
+
+task createFlatBuffersCPP(type: Exec) {
+    commandLine 'sh', '-c', 'flatc --cpp -o cpp_flatbuffer_gen generated/flatbuffers/* && zip -r cpp_flatbuffer_gen.zip cpp_flatbuffer_gen && rm -rf ./cpp_flatbuffer_gen/ && mv -f cpp_flatbuffer_gen.zip ~/Downloads/cpp_flatbuffer_gen.zip'
+}
+
+jar {
+    manifest {
+        attributes "Main-Class": "com.skillz.example_sync_server.Main"
+    }
+
+    from {
+        configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
+    }
+}
+

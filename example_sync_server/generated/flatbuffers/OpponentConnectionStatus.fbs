@@ -1,0 +1,5 @@
+table OpponentConnectionStatus {
+    opcode: short = 9;
+    status: short;              // 0 = normal, 1 = warning, 2 = disconnected
+    timeRemaining: short;
+}

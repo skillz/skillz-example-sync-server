@@ -1,0 +1,5 @@
+table MatchOver {
+    opcode: short = 11;
+    playerScore: int;
+    opponentScore: int;
+}

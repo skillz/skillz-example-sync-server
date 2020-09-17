@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <bytecodeTargetLevel>
+      <module name="diamond_strike_server.diamond_strike.main" target="1.8" />
+      <module name="diamond_strike_server.diamond_strike.test" target="1.8" />
+      <module name="diamond_strike_server.main" target="1.8" />
+      <module name="diamond_strike_server.pool_payday.main" target="1.8" />
+      <module name="diamond_strike_server.pool_payday.test" target="1.8" />
+      <module name="diamond_strike_server.server.main" target="1.8" />
+      <module name="diamond_strike_server.server.test" target="1.8" />
+      <module name="diamond_strike_server.test" target="1.8" />
+      <module name="pool_payday_server.example_sync_server.main" target="11" />
+      <module name="pool_payday_server.example_sync_server.test" target="11" />
+      <module name="pool_payday_server.main" target="1.8" />
+      <module name="pool_payday_server.pool_payday.main" target="11" />
+      <module name="pool_payday_server.pool_payday.test" target="11" />
+      <module name="pool_payday_server.server.main" target="1.8" />
+      <module name="pool_payday_server.server.test" target="1.8" />
+      <module name="pool_payday_server.test" target="1.8" />
+    </bytecodeTargetLevel>
+  </component>
+</project>

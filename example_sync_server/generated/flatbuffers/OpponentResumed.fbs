@@ -1,0 +1,3 @@
+table OpponentResumed {
+    opcode: short = 8;
+}

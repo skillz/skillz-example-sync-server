@@ -1,0 +1,3 @@
+table ForfeitMatch {
+    opcode: short = 3;
+}

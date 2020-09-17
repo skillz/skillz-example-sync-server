@@ -1,0 +1,4 @@
+table PlayerInput {
+    opcode: short = 13;
+    newScore: int;
+}

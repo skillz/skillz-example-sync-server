@@ -1,0 +1,5 @@
+def ctx = context(ctype: Script)
+
+contributor(ctx, {
+    property name: "player", type: "com.skillz.example_sync_server.Player"
+})

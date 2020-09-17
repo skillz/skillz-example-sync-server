@@ -1,0 +1,4 @@
+table PlayerReconnected {
+    opcode: short = 10;
+    playerReconnectedUserId: long;
+}

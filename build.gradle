@@ -28,13 +28,8 @@ subprojects {
     dependencies {
         compile group: 'com.google.flatbuffers', name: 'flatbuffers-java', version: "${flatbuffersVersion}"
         compile 'org.slf4j:slf4j-api:1.7.16'
-        compile 'org.slf4j:slf4j-simple:1.7.16'
+        compile group: 'ch.qos.logback', name: 'logback-classic', version: '1.+'
         compile 'org.codehaus.groovy:groovy-all:3.0.0-rc-3'
         compile "org.spockframework:spock-core:2.0-M2-groovy-3.0"
     }
-}
-
-task copyTask(type: Copy) {
-    from 'certs/.'
-    into 'build/libs/'
 }

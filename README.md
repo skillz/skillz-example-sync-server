@@ -297,11 +297,11 @@ private void on(GameState message)
 ### TLS Encrypted Connection
 In order to secure the client's connection to the game server, the socket connection is encrytped using TLS. This ensures that only legitimate game clients are allowed to connect to the sync game server, and also that third-parties are unable to capture and read data-in-flight.
 
-In order to properly enable and utilize TSL with the Sync Server SDK, first you must create a private and public certificate and store them in `your_server_name/resources/certs/`. The private key and certificate can be named anything so long as they have the proper `.crt` and `.key` file ending. Ensure only one private key / certificate pair exists. [See here](https://github.com/skillz/skillz-example-sync-server/tree/master/example_sync_server/resources/certs) for the example keys provided in the example server repo.
+In order to properly enable and utilize TSL with the Sync Server SDK, first you must create a private and public certificate and store them in `your_server_name/resources/certs/`. The private key and certificate must ne named `Sync.crt` and `Sync.key`. [See here](https://github.com/skillz/skillz-example-sync-server/tree/master/example_sync_server/resources/certs) for the example keys provided in the example server repo.
 
 In order to generate new keyfiles, you can run the following command in Terminal:
 ```
-openssl req -new -newkey rsa:4096 -x509 -sha256 -days 1000 -nodes -out TestSync.crt -keyout TestSync.key
+openssl req -new -newkey rsa:4096 -x509 -sha256 -days 1000 -nodes -out Sync.crt -keyout Sync.key
 ```
 
 You'll be asked to fill in some information. Take note of the `Common Name` as that will be used to configure the client. Here's an example of creating a key:

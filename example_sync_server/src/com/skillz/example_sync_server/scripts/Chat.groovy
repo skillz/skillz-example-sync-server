@@ -8,7 +8,7 @@
 //  - Ran as a groovy script as opposed to the statically compiled MessageHandler via @CompileStatic
 
 def validate(messages.Chat message) {
-    if (player.appPaused()) {
+    if (player.isPaused()) {
         return false
     }
     true

@@ -76,6 +76,8 @@ For example, imagine two players attempt to pick up an item at the same time. Ea
 
 With a 150ms tick rate, the messages would be received during the same tick (during a 150ms time period), stored, and processed at the same time at the end of the tick. After processing the messages, any outgoing messages are sent. This ensures that the server is latency tolerant and player input is processed fairly.
 
+If you'd like to run the server as fast as possible, we recommend a `TICK_RATE` of 30ms, which is a standard for very fast-paced games like MOBAs and many FPSs.
+
 ### Message Validation and Handling
 `Messages` are processed in two parts.
 
@@ -293,7 +295,7 @@ private void on(GameState message)
 ### TLS Encrypted Connection
 In order to secure the client's connection to the game server, the socket connection is encrytped using TLS. This ensures that only legitimate game clients are allowed to connect to the sync game server, and also that third-parties are unable to capture and read data-in-flight.
 
-In order to properly enable and utilize TSL with the Sync Server SDK, first you must create a private and public certificate and store them in `your_server_name/resources/certs/`. The private key and certificate must ne named `Sync.crt` and `Sync.key`. [See here](https://github.com/skillz/skillz-example-sync-server/tree/master/example_sync_server/resources/certs) for the example keys provided in the example server repo.
+In order to properly enable and utilize TSL with the Sync Server SDK, first you must create a private and public certificate and store them in `your_server_name/resources/certs/`. The private key and certificate must be named `Sync.crt` and `Sync.key`. [See here](https://github.com/skillz/skillz-example-sync-server/tree/master/example_sync_server/resources/certs) for the example keys provided in the example server repo.
 
 In order to generate new keyfiles, you can run the following command in Terminal:
 ```

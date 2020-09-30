@@ -1,5 +1,5 @@
 table GameState {
-    opcode: short = 12;
+    opcode: short = 14;
     gameTickCount: int;
     tickCount: int;
     playerScore: int;

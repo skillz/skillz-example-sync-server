@@ -1,0 +1,4 @@
+table Chat {
+    opcode: short = 12;
+    chatId: short;
+}

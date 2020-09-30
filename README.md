@@ -30,7 +30,7 @@ We are actively working on implementing new features in the SDK, but here is sho
 * Reconnecting to the server after losing access to the internet and restoring player state
 * Pausing/Resuming the game when players background/foreground the app
 * Tracking users that have been inactive (disconnected or backgrounded) for too long
-* Broadcast tick system for authoritative updates to players. Optional Passthrough mode if this is not desired
+* Broadcast tick system for authoritative updates to players.
 * TLS to ensure fairness through encrypted communications
 
 Technologies
@@ -59,8 +59,8 @@ Additionally, relevant Gradle tasks include:
 Setting up TLS
 * See [TLS Encrypted Connection](tls-encrypted-connection) below
 
-The Tick and Passthrough
-The server can operate in one of two modes — `TICK` and `PASSTHROUGH`. Running the server in `TICK` mode is the preferred way of developing with this SDK and ensures that messages are processed on and sent out on each “tick” of the server. This tick rate is defined in milliseconds in your custom `Game` class like so:
+The Tick
+Running the server with a `TICK` ensures that messages are processed on and sent out on each “tick” of the server. This tick rate is defined in milliseconds in your custom `Game` class like so:
 ```
 public static final int TICK_RATE = 150
 ```
@@ -70,15 +70,13 @@ The purpose of a Tick is to:
 * Provide a consistent service SLA. The server will always respond at the tick rate interval, meaning that each broadcast remains consistent regardless of server load. This is useful for providing a consistent user experience and makes things like client-side interpolation of frames easier to implement
 * Provide fair processing of client inputs. By setting a frame of reference, a Tick allows us to define an interval for which inputs are said to have occurred “at the same time”. When two inputs are considered to have been received at the same time (within the same Tick interval), then the server SDK will automatically handle selecting which user to process first using a fair system that trades off which user has priority
 
-We highly recommend using a Tick, but if a Tick is undesirable, it can be turned off by starting the Server in `PASSTHROUGH mode`. In this mode, packets will be processed as soon as they are received and broadcast out as fast as possible.
-
 With the `TICK_RATE` set to 150, the server will read the incoming messages every 150ms, process those messages, and respond at the start of the next tick. This ensures fairness as players have different latencies.
 
 For example, imagine two players attempt to pick up an item at the same time. Each player sends an ItemPickupMessage but Player A is located physically closer to the game-server. As such, Player A’s message is received before Player B’s message, and they pick up the item, even though they clicked at the same time.
 
 With a 150ms tick rate, the messages would be received during the same tick (during a 150ms time period), stored, and processed at the same time at the end of the tick. After processing the messages, any outgoing messages are sent. This ensures that the server is latency tolerant and player input is processed fairly.
 
-If you run the server in `PASSTHROUGH` mode, then messages are instantly processed when received and instantly sent with the player.passthrough method. This can be useful for implementing features like chat/taunts, where no server logic is required and where there is no effect on fairness.
+If you'd like to run the server as fast as possible, we recommend a `TICK_RATE` of 30ms, which is a standard for very fast-paced games like MOBAs and many FPSs.
 
 ### Message Validation and Handling
 `Messages` are processed in two parts.
@@ -297,11 +295,11 @@ private void on(GameState message)
 ### TLS Encrypted Connection
 In order to secure the client's connection to the game server, the socket connection is encrytped using TLS. This ensures that only legitimate game clients are allowed to connect to the sync game server, and also that third-parties are unable to capture and read data-in-flight.
 
-In order to properly enable and utilize TSL with the Sync Server SDK, first you must create a private and public certificate and store them in `your_server_name/resources/certs/`. The private key and certificate can be named anything so long as they have the proper `.crt` and `.key` file ending. Ensure only one private key / certificate pair exists. [See here](https://github.com/skillz/skillz-example-sync-server/tree/master/example_sync_server/resources/certs) for the example keys provided in the example server repo.
+In order to properly enable and utilize TSL with the Sync Server SDK, first you must create a private and public certificate and store them in `your_server_name/resources/certs/`. The private key and certificate must be named `Sync.crt` and `Sync.key`. [See here](https://github.com/skillz/skillz-example-sync-server/tree/master/example_sync_server/resources/certs) for the example keys provided in the example server repo.
 
 In order to generate new keyfiles, you can run the following command in Terminal:
 ```
-openssl req -new -newkey rsa:4096 -x509 -sha256 -days 1000 -nodes -out TestSync.crt -keyout TestSync.key
+openssl req -new -newkey rsa:4096 -x509 -sha256 -days 1000 -nodes -out Sync.crt -keyout Sync.key
 ```
 
 You'll be asked to fill in some information. Take note of the `Common Name` as that will be used to configure the client. Here's an example of creating a key:
@@ -387,3 +385,4 @@ These opcodes are in use by the Server SDK and should not be used by the develop
 * 9  => OpponentConnectionStatus
 * 10 => PlayerReconnected
 * 11 => MatchOver
+* 12 => Chat

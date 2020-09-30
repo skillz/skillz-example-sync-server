@@ -15,7 +15,7 @@ public final class GameState extends Message {
   public void __init(int _i, ByteBuffer _bb) { __reset(_i, _bb); }
   public GameState __assign(int _i, ByteBuffer _bb) { __init(_i, _bb); return this; }
 
-  public short opcode() { int o = __offset(4); return o != 0 ? bb.getShort(o + bb_pos) : 12; }
+  public short opcode() { int o = __offset(4); return o != 0 ? bb.getShort(o + bb_pos) : 14; }
   public int gameTickCount() { int o = __offset(6); return o != 0 ? bb.getInt(o + bb_pos) : 0; }
   public int tickCount() { int o = __offset(8); return o != 0 ? bb.getInt(o + bb_pos) : 0; }
   public int playerScore() { int o = __offset(10); return o != 0 ? bb.getInt(o + bb_pos) : 0; }
@@ -37,7 +37,7 @@ public final class GameState extends Message {
   }
 
   public static void startGameState(FlatBufferBuilder builder) { builder.startTable(5); }
-  public static void addOpcode(FlatBufferBuilder builder, short opcode) { builder.addShort(0, opcode, 12); }
+  public static void addOpcode(FlatBufferBuilder builder, short opcode) { builder.addShort(0, opcode, 14); }
   public static void addGameTickCount(FlatBufferBuilder builder, int gameTickCount) { builder.addInt(1, gameTickCount, 0); }
   public static void addTickCount(FlatBufferBuilder builder, int tickCount) { builder.addInt(2, tickCount, 0); }
   public static void addPlayerScore(FlatBufferBuilder builder, int playerScore) { builder.addInt(3, playerScore, 0); }

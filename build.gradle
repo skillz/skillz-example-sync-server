@@ -5,7 +5,8 @@ plugins {
     id 'groovy'
     id 'io.netifi.flatbuffers' version '1.0.6'
 }
-version '1.0-SNAPSHOT'
+
+def nettyVersion = '4.1.52.Final'
 
 sourceCompatibility = 1.8
 
@@ -31,5 +32,9 @@ subprojects {
         compile group: 'ch.qos.logback', name: 'logback-classic', version: '1.+'
         compile 'org.codehaus.groovy:groovy-all:3.0.0-rc-3'
         compile "org.spockframework:spock-core:2.0-M2-groovy-3.0"
+        compile group: 'io.netty', name: 'netty-all', version: "${nettyVersion}"
+        compile group: 'org.reflections', name: 'reflections', version: '0.9.12'
+        compile group: 'org.gperfutils', name: 'gprof', version: '0.3.1-groovy-2.4'
+        compile 'com.orbitz.consul:consul-client:1.4.0'
     }
 }

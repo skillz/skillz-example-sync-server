@@ -1,6 +1,5 @@
 apply plugin: 'application'
 mainClassName = 'com.skillz.example_sync_server.Main'
-def nettyVersion = '4.1.42.Final'
 
 run.doFirst {
     environment 'scriptsPath', project(':example_sync_server').projectDir.absolutePath + '/src/com/skillz/example_sync_server/scripts/'
@@ -23,9 +22,6 @@ sourceSets {
 }
 
 dependencies {
-    compile group: 'io.netty', name: 'netty-all', version: "${nettyVersion}"
-    compile group: 'org.reflections', name: 'reflections', version: '0.9.12'
-    compile group: 'org.gperfutils', name: 'gprof', version: '0.3.1-groovy-2.4'
     compile fileTree(dir: 'libs', include: '*.jar')
 }
 
@@ -56,6 +52,7 @@ jar {
 
     from {
         configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
+        configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
     }
 }
 

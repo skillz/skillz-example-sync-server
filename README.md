@@ -385,3 +385,4 @@ These opcodes are in use by the Server SDK and should not be used by the develop
 * 9  => OpponentConnectionStatus
 * 10 => PlayerReconnected
 * 11 => MatchOver
+* 12 => Chat

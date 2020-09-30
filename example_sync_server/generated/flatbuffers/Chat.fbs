@@ -1,4 +1,4 @@
 table Chat {
-    opcode: short = 14;
+    opcode: short = 12;
     chatId: short;
 }

@@ -42,7 +42,7 @@ Technologies
 ### Setting up a new project
 Requirements to follow our setup:
 * Custom Flatbuffer compiler that simply extends our Message rather than Table to make use of opcodes 
-    * Please copy [the `flatc` executable binary file located in `third-party/flatc/`]() to `/usr/local/bin` and ensure it has proper permissions
+    * Please copy [the `flatc` executable binary file located in `third-party/flatc/`](https://github.com/skillz/skillz-example-sync-server/blob/master/third-party/flatc/flatc) to `/usr/local/bin` and ensure it has proper permissions
 * Intellij Idea IDE
 * Unity LTS 2019.4.9f1
 

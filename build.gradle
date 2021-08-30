@@ -38,7 +38,7 @@ subprojects {
     def flatbuffersVersion = '1.12.0'
 
     dependencies {
-        implementation group: 'com.skillz', name: 'sync-server-sdk', version: '1.+', changing: true
+        implementation group: 'com.skillz', name: 'sync-server-sdk', version: '+', changing: true
         implementation group: 'com.google.flatbuffers', name: 'flatbuffers-java', version: "${flatbuffersVersion}"
         implementation 'org.slf4j:slf4j-api:1.7.16'
         implementation group: 'ch.qos.logback', name: 'logback-classic', version: '1.+'

@@ -8,10 +8,21 @@ plugins {
 
 def nettyVersion = '4.1.52.Final'
 
-sourceCompatibility = 1.8
+sourceCompatibility = 1.11
+targetCompatibility = 1.11
 
-repositories {
-    mavenCentral()
+allprojects {
+    repositories {
+        mavenCentral()
+
+        maven {
+            url = uri("https://maven.pkg.github.com/skillz/skillz-example-sync-server")
+            credentials {
+                username = "public"
+                password = "\u0067hp_3qKf1O0yqgycE0dXduQLNI8BzHgnzf2GquhT"
+            }
+        }
+    }
 }
 
 subprojects {
@@ -27,14 +38,25 @@ subprojects {
     def flatbuffersVersion = '1.12.0'
 
     dependencies {
-        compile group: 'com.google.flatbuffers', name: 'flatbuffers-java', version: "${flatbuffersVersion}"
-        compile 'org.slf4j:slf4j-api:1.7.16'
-        compile group: 'ch.qos.logback', name: 'logback-classic', version: '1.+'
-        compile 'org.codehaus.groovy:groovy-all:3.0.0-rc-3'
-        compile "org.spockframework:spock-core:2.0-M2-groovy-3.0"
-        compile group: 'io.netty', name: 'netty-all', version: "${nettyVersion}"
-        compile group: 'org.reflections', name: 'reflections', version: '0.9.12'
-        compile group: 'org.gperfutils', name: 'gprof', version: '0.3.1-groovy-2.4'
-        compile 'com.orbitz.consul:consul-client:1.4.0'
+        implementation group: 'com.skillz', name: 'sync-server-sdk', version: '+', changing: true
+        implementation group: 'com.google.flatbuffers', name: 'flatbuffers-java', version: "${flatbuffersVersion}"
+        implementation 'org.slf4j:slf4j-api:1.7.16'
+        implementation group: 'ch.qos.logback', name: 'logback-classic', version: '1.+'
+        implementation 'org.codehaus.groovy:groovy-all:3.0.7'
+        implementation "org.spockframework:spock-core:2.0-M2-groovy-3.0"
+        implementation group: 'io.netty', name: 'netty-all', version: "${nettyVersion}"
+        implementation group: 'org.reflections', name: 'reflections', version: '0.9.12'
+        implementation group: 'org.gperfutils', name: 'gprof', version: '0.3.1-groovy-2.4'
+        implementation 'com.orbitz.consul:consul-client:1.4.0'
+        implementation 'io.prometheus:simpleclient:0.9.0'
+        implementation 'io.prometheus:simpleclient_httpserver:0.9.0'
+        implementation 'com.squareup.okhttp3:okhttp:4.9.0'
+        implementation(platform("com.squareup.okhttp3:okhttp-bom:4.9.0"))
+        implementation("com.squareup.okhttp3:okhttp")
+        implementation("com.squareup.okhttp3:logging-interceptor")
+        implementation 'com.google.code.gson:gson:2.8.6'
+        testImplementation platform("org.spockframework:spock-bom:2.0-groovy-3.0")
+        testImplementation "org.spockframework:spock-core"
+        testImplementation "org.spockframework:spock-junit4"
     }
 }

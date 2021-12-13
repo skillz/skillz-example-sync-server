@@ -47,7 +47,7 @@ task createFlatBuffersCPP(type: Exec) {
 
 task exportDockerImageArchive(type: Exec) {
     dependsOn('jar')
-    commandLine 'sh', '-c', 'rm -rf build/docker && mkdir -p build/docker/source && cp build/libs/' + project.name + '.jar build/docker/source/server.jar && cp ../Dockerfile build/docker/source/.  && cp ../healthcheck.sh build/docker/source/. && cd build/docker/source && docker build -t ' + project.name + ' . && docker save -o ../' + project.name + '_`date +%m.%d.%Y`.tar ' + project.name + ' && cd .. && rm -rf source'
+    commandLine 'sh', '-c', 'rm -rf build/docker && mkdir -p build/docker/source && cp build/libs/' + project.name + '.jar build/docker/source/server.jar && cp ../Dockerfile build/docker/source/.  && cp ../healthcheck.sh build/docker/source/. && cd build/docker/source && /usr/local/bin/docker build -t ' + project.name + ' . && /usr/local/bin/docker save -o ../' + project.name + '_`date +%m.%d.%Y`.tar ' + project.name + ' && cd .. && rm -rf source'
 }
 
 jar {

@@ -45,6 +45,11 @@ task createFlatBuffersCPP(type: Exec) {
     commandLine 'sh', '-c', 'flatc --cpp -o cpp_flatbuffer_gen generated/flatbuffers/* && zip -r cpp_flatbuffer_gen.zip cpp_flatbuffer_gen && rm -rf ./cpp_flatbuffer_gen/ && mv -f cpp_flatbuffer_gen.zip ~/Downloads/cpp_flatbuffer_gen.zip'
 }
 
+task exportDockerImageArchive(type: Exec) {
+    dependsOn('jar')
+    commandLine 'sh', '-c', 'rm -rf build/docker && mkdir -p build/docker/source && cp build/libs/' + project.name + '.jar build/docker/source/server.jar && cp ../Dockerfile build/docker/source/.  && cp ../healthcheck.sh build/docker/source/. && cd build/docker/source && /usr/local/bin/docker build -t ' + project.name + ' . && /usr/local/bin/docker save -o ../' + project.name + '_`date +%m.%d.%Y`.tar ' + project.name + ' && cd .. && rm -rf source'
+}
+
 jar {
     manifest {
         attributes "Main-Class": "com.skillz.example_sync_server.Main"

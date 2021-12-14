@@ -10,9 +10,19 @@ import java.security.SecureRandom
 @CompileStatic
 class ExampleSkillzGame extends Game<Player> {
 
-    public static final int TICK_RATE = 150
+    // Required Configuration Vars
+    public static final int TICK_RATE = 100
     public static final String VERSION = "1.0"
     public static final int VERSION_NUMBER = 1
+
+    // Optional Configuration Vars
+    public static final int WARNING_SECONDS = 4
+    public static final int DISCONNECT_SECONDS = 15
+    public static final int MAX_RECONNECTS = -1
+    public static final int MAX_ALLOWED_APP_PAUSES = -1
+    public static final int MAX_ALLOWED_APP_CONNECTION_WARNINGS = -1
+    public static final int MIN_TIME_IN_SECONDS_FOR_NEW_PAUSE = 1
+    public static final boolean USE_CUMULATIVE_PAUSE_DISCONNECT_TIMER = true
 
     private static final int WIN_SCORE = 100
 

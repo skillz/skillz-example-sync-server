@@ -18,22 +18,30 @@ public final class MatchOver extends Message {
   public short opcode() { int o = __offset(4); return o != 0 ? bb.getShort(o + bb_pos) : 11; }
   public int playerScore() { int o = __offset(6); return o != 0 ? bb.getInt(o + bb_pos) : 0; }
   public int opponentScore() { int o = __offset(8); return o != 0 ? bb.getInt(o + bb_pos) : 0; }
+  public long abortingPlayer() { int o = __offset(10); return o != 0 ? bb.getLong(o + bb_pos) : 0L; }
+  public long forfeitingPlayer() { int o = __offset(12); return o != 0 ? bb.getLong(o + bb_pos) : 0L; }
 
   public static int createMatchOver(FlatBufferBuilder builder,
       short opcode,
       int playerScore,
-      int opponentScore) {
-    builder.startTable(3);
+      int opponentScore,
+      long abortingPlayer,
+      long forfeitingPlayer) {
+    builder.startTable(5);
+    MatchOver.addForfeitingPlayer(builder, forfeitingPlayer);
+    MatchOver.addAbortingPlayer(builder, abortingPlayer);
     MatchOver.addOpponentScore(builder, opponentScore);
     MatchOver.addPlayerScore(builder, playerScore);
     MatchOver.addOpcode(builder, opcode);
     return MatchOver.endMatchOver(builder);
   }
 
-  public static void startMatchOver(FlatBufferBuilder builder) { builder.startTable(3); }
+  public static void startMatchOver(FlatBufferBuilder builder) { builder.startTable(5); }
   public static void addOpcode(FlatBufferBuilder builder, short opcode) { builder.addShort(0, opcode, 11); }
   public static void addPlayerScore(FlatBufferBuilder builder, int playerScore) { builder.addInt(1, playerScore, 0); }
   public static void addOpponentScore(FlatBufferBuilder builder, int opponentScore) { builder.addInt(2, opponentScore, 0); }
+  public static void addAbortingPlayer(FlatBufferBuilder builder, long abortingPlayer) { builder.addLong(3, abortingPlayer, 0L); }
+  public static void addForfeitingPlayer(FlatBufferBuilder builder, long forfeitingPlayer) { builder.addLong(4, forfeitingPlayer, 0L); }
   public static int endMatchOver(FlatBufferBuilder builder) {
     int o = builder.endTable();
     return o;

@@ -23,6 +23,8 @@ class ExampleSkillzGame extends Game<Player> {
     public static final int MAX_ALLOWED_APP_CONNECTION_WARNINGS = -1
     public static final int MIN_TIME_IN_SECONDS_FOR_NEW_PAUSE = 1
     public static final boolean USE_CUMULATIVE_PAUSE_DISCONNECT_TIMER = true
+    public static final boolean DO_ABORT_ON_DISCONNECT_TIMEOUT = false
+    public static final int FORFEIT_SCORE_VALUE = 0
 
     private static final int WIN_SCORE = 100
 

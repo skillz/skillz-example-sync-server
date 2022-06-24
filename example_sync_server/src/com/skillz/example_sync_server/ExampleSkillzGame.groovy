@@ -25,6 +25,7 @@ class ExampleSkillzGame extends Game<Player> {
     public static final boolean USE_CUMULATIVE_PAUSE_DISCONNECT_TIMER = true
     public static final boolean ABORT_ON_DISCONNECT = true
     public static final int FORFEIT_SCORE_VALUE = 0
+    public static final boolean IS_EPHEMERAL = true
 
     private static final int WIN_SCORE = 100
 
